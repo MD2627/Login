@@ -10,7 +10,7 @@ function Home() {
     email: "",
     password: "",
   });
-  const [data, setData] = useState([]);
+  const [data] = useState([]);
   const getData = (e) => {
     const { value, name } = e.target;
     setValu(() => {
