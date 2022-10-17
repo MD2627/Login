@@ -10,7 +10,7 @@ function Home() {
     email: "",
     password: "",
   });
-  const [data] = useState([]);
+  const [data, setData] = useState([]);
   const getData = (e) => {
     const { value, name } = e.target;
     setValu(() => {
@@ -42,7 +42,6 @@ function Home() {
     <div className="container col-4">
       <Form>
         <h1 className="my-4">Register</h1>
-
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Full Name</Form.Label>
           <Form.Control
@@ -75,7 +74,6 @@ function Home() {
             placeholder="Password"
           />
         </Form.Group>
-
         <Button variant="danger" onClick={addData} type="submit">
           Submit
         </Button>
