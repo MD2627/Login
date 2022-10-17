@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { NavLink, useNavigate } from "react-router-dom";
-
+let arr= []
 function Home() {
   const logedin = useNavigate();
   const [valu, setValu] = useState({
@@ -10,7 +10,7 @@ function Home() {
     email: "",
     password: "",
   });
-  const [data, setData] = useState([]);
+  const [data] = useState([]);
   const getData = (e) => {
     const { value, name } = e.target;
     setValu(() => {
@@ -34,7 +34,8 @@ function Home() {
     } else if (password.length < 4) {
       alert("password in to shoret");
     } else {
-      localStorage.setItem("user", JSON.stringify([...data, valu]));
+      arr.push(valu)
+      localStorage.setItem("user", JSON.stringify(...data, arr));
       logedin("/login");
     }
   };
