@@ -32,7 +32,7 @@ function Home() {
     } else if (password === "") {
       alert("password is required");
     } else if (password.length < 4) {
-      alert("password in to shoret");
+      alert("password is to shoret");
     } else {
       arr.push(valu)
       localStorage.setItem("user", JSON.stringify(...data, arr));
@@ -40,7 +40,9 @@ function Home() {
     }
   };
   return (
-    <div className="container col-4">
+    
+  <div className="container col-4">
+
       <Form>
         <h1 className="my-4">Register</h1>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -86,6 +88,7 @@ function Home() {
         </span>
       </p>
     </div>
+ 
   );
 }
 

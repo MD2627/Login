@@ -21,7 +21,7 @@ function Login() {
   };
   const addData = (e) => {
     e.preventDefault();
-    const compare = localStorage.getItem("user");
+    const compare = JSON.parse(localStorage.getItem("user"));
     const { email, password } = valu;
     if (email === "") {
       alert("email is required");
@@ -33,12 +33,12 @@ function Login() {
       alert("password is invalid");
     } else {
       if (compare && compare.length) {
-        const userData = JSON.parse(compare);
+        const userData = compare
         const userLogin = userData.filter((el, i) => {
           return el.email === email && el.password === password;
         });
         if (userLogin.length === 0) {
-          alert("invalid Email ");
+          alert("password is invalid");
         } else {
           console.log("user login");
           localStorage.setItem("user_login", JSON.stringify(userData));

@@ -5,15 +5,12 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 
 function Change() {
-  const [spass, setSPass] = useState()
-  const [newp, setNewp] = useState()
+  const [spass, setSPass] = useState();
+  const [newp, setNewp] = useState();
   const [logindata, setLogindata] = useState([]);
   const logedin = useNavigate();
-  const logdinData = JSON.parse(localStorage.getItem("user_login"));
- 
-  const currentPass = logdinData[0]['password']
-    
-  
+  const currentPass = JSON.parse(localStorage.getItem("user_login"));
+
   const Getdata = () => {
     const getuser = localStorage.getItem("user_login");
     if (getuser && getuser.length) {
@@ -26,17 +23,22 @@ function Change() {
   }, []);
   const passChange = (e) => {
     e.preventDefault();
-   if (spass === currentPass){
-      console.log("matched");
-    } if(newp === currentPass){
-      alert('can not use old pass')
-    }else{
-      localStorage.setItem("pass",JSON.stringify(newp))
-
-      // localStorage.removeItem("user_login");
-      logedin("/login");
+    if (spass == null) {
+      alert("enter old pass");
+    } else if (newp == null) {
+      alert("pleasr enter new password");
+    } else if (spass !== currentPass[0].password) {
+      alert("Old Password is not match");
+    } else {
+      if (newp === currentPass[0].password) {
+        alert("can not use Old Password");
+      } else {
+        currentPass[0].password = newp;
+        localStorage.setItem("user", JSON.stringify(currentPass));
+        localStorage.removeItem("user_login");
+        logedin("/login");
+      }
     }
-     
   };
   return (
     <>
@@ -51,7 +53,9 @@ function Change() {
               <Form.Control
                 type="password"
                 name="password"
-                onChange={(ev) => { setSPass(ev.target.value) }}
+                onChange={(ev) => {
+                  setSPass(ev.target.value);
+                }}
                 placeholder="Password"
               />
             </Form.Group>
@@ -60,7 +64,9 @@ function Change() {
               <Form.Control
                 type="password"
                 name="newpassword"
-                onChange={(ev) => { setNewp(ev.target.value) }}
+                onChange={(ev) => {
+                  setNewp(ev.target.value);
+                }}
                 placeholder="Password"
               />
             </Form.Group>
